@@ -1,0 +1,19 @@
+{
+  "name": "supermario",
+  "version": "1.0.0",
+  "description": "My first JS game",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarionMichielsen/SuperMario.git"
+  },
+  "author": "Marion Michielsen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarionMichielsen/SuperMario/issues"
+  },
+  "homepage": "https://github.com/MarionMichielsen/SuperMario#readme"
+}
