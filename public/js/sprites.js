@@ -9,6 +9,14 @@ export function loadMarioSprite(){
       return sprites;
       });
   }
+  export function loadMario2Sprite(){
+    return loadImage('/img/characters.gif')
+    .then(image => {
+        const sprites = new SpriteSheet(image, 16, 16);
+        sprites.define('idle', 276, 106, 16 , 16);
+        return sprites;
+        });
+    }
 
 export function loadBackgroundSprites(){
 return loadImage('/img/tiles.png')
