@@ -46,22 +46,21 @@ Promise.all([
     timer.start();
 
     setTimeout (age, 3000);
-
-    var i = 0;
-
+var i = 0;
     function age(){
         var xhr = new XMLHttpRequest()
-        xhr.open("GET", "/js/data.json")
+      //  xhr.open("GET", "/js/data.json")
+        xhr.open("GET", "http://localhost:3001/number")
         xhr.onload = function(){
           var data = JSON.parse(this.response)
-          mario2.pos.set(data[i].x, data[i].y)
-          ++i;
+ //         mario2.pos.set(data.x, data.y)
+        mario2.pos.set(data[i].x, data[i].y)
+       // ++i;
+      //  console.log(data.x, data.y)
         }
       xhr.send()
       setTimeout(age, 3000)
       }
 
-
-   // timer2.start();
 });
 
