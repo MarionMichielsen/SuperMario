@@ -61,8 +61,9 @@ function saveData() {
   // function setCurrentUser(name) {
   //   currentUser = name;
   // }
-  //export function getCurrentUser() {
-  //  return currentUser;
+}
+  export function getCurrentUser() {
+   return currentUser;
 }
 
 // export function pushData(posX, posY){
