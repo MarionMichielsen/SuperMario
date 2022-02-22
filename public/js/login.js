@@ -1,5 +1,6 @@
 var currentUser = "red";
 
+
 function checkLogin() {
   let email, psw;
   email = document.getElementById("emailLogin").value;
@@ -21,6 +22,7 @@ function checkLogin() {
     })[0];
     localStorage.setItem("name", current_user.name);
     localStorage.setItem("email", current_user.email);
+   // console.log("email: "+localStorage.getElementById("email"))
     window.location.href = "game.html";
   } else {
     alert("Login Fail");
@@ -31,12 +33,10 @@ function saveData() {
   let name, email, psw;
   name = document.getElementById("name").value;
   email = document.getElementById("email").value;
-  posX = 0;
-  posY = 0;
-
   psw = document.getElementById("psw").value;
 
   let user_records = new Array();
+
   user_records = JSON.parse(localStorage.getItem("users"))
     ? JSON.parse(localStorage.getItem("users"))
     : [];
@@ -47,14 +47,23 @@ function saveData() {
   ) {
     alert("duplicate data");
   } else {
+   
+    const position  = {
+      posX: 100,
+      posY: 100  }
+  
+    localStorage.setItem(email, JSON.stringify(position));
+    console.log("Email: "+email+ " PositionX: "+ position.posX+ " PositionY: "+position.posY)
+
     user_records.push({
       name: name,
       email: email,
       psw: psw,
-      posX: posX,
-      posY, posY,
+
     });
     localStorage.setItem("users", JSON.stringify(user_records));
+    //console.log("User records:" +user_records);
+   // console.log(email)
   }
   // showData();
 
@@ -62,9 +71,10 @@ function saveData() {
   //   currentUser = name;
   // }
 }
-  export function getCurrentUser() {
-   return currentUser;
-}
+
+//   export function getCurrentUser() {
+//    return currentUser;
+// }
 
 // export function pushData(posX, posY){
 //     user_records.push({

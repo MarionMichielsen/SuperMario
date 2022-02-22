@@ -5,15 +5,18 @@ import {createMario2 } from './entities.js';
 import {createCollisionLayer} from './layers.js';
 import {setupKeyboard} from './input.js';
 import { Mario2Go } from './traits/Go.js';
-import { getCurrentUser } from './login.js';
+//import { getCurrentUser } from './login.js';
 
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
-var user = "player"
-user = getCurrentUser();
-console.log(user);
+// var userEmail = getEmail();
+//user = getCurrentUser();
+//console.log(user);
+// console.log(userEmail);
+
+//localStorage.getItem(current_user.email);
 
 Promise.all([
     createMario(),
@@ -22,7 +25,16 @@ Promise.all([
 ])
 .then(([mario, mario2, level]) => {
     mario2.pos.set(32,32);
-    mario.pos.set(64, 64);
+   // var email = localStorage.getElementById("email");
+   var email = "wqew"
+    // const json = localStorage.getItem(email);
+    // const obj = JSON.parse(json);
+
+    // console.log(obj.posX);
+    // console.log(obj.posY);
+    
+    mario.pos.set(64,64);
+    mario2.pos.set(32,32);
 
     level.comp.layers.push(createCollisionLayer(level));
 
@@ -43,14 +55,16 @@ Promise.all([
                 user_position.push({
                     posX: posX,
                     posY: posY })
-               localStorage.setItem(user, JSON.stringify(user_position));
-               console.log(localStorage.getItem(user))
+            //   localStorage.setItem(userEmail, JSON.stringify(user_position));
+             //  console.log(localStorage.getItem(user))
+             console.log(JSON.stringify(user_position))
+             localStorage.setItem(email, JSON.stringify(user_position))
+             console.log(JSON.stringify(localStorage.getItem(email)))
 
             }
               });
  
-        });
-
+            })
 
 
     const timer = new Timer(1/60);
