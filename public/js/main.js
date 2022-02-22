@@ -5,9 +5,15 @@ import {createMario2 } from './entities.js';
 import {createCollisionLayer} from './layers.js';
 import {setupKeyboard} from './input.js';
 import { Mario2Go } from './traits/Go.js';
+import { getCurrentUser } from './login.js';
+
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
+
+var user = "player"
+user = getCurrentUser();
+console.log(user);
 
 Promise.all([
     createMario(),
@@ -31,14 +37,21 @@ Promise.all([
             if (event.buttons === 1) {
                 mario.vel.set(0, 0);
                 mario.pos.set(event.offsetX, event.offsetY);
+               var posX = event.offsetX;
+               var posY = event.offsetY;
+               localStorage.setItem(user, JSON.stringify(posX));
+               localStorage.setItem(user, JSON.stringify(posY));
+
             }
+              });
+ 
         });
-    });
+
 
 
     const timer = new Timer(1/60);
-    timer.update = function update(deltaTime) {
-        level.update(deltaTime);
+    timer.update = function update(user, deltaTime) {
+        level.update(user, deltaTime);
         level.comp.draw(context);
     }
 
@@ -46,20 +59,16 @@ Promise.all([
     timer.start();
 
     setTimeout (age, 3000);
-var i = 0;
     function age(){
         var xhr = new XMLHttpRequest()
       //  xhr.open("GET", "/js/data.json")
         xhr.open("GET", "http://localhost:3001/number")
         xhr.onload = function(){
-          var data = JSON.parse(this.response)
- //         mario2.pos.set(data.x, data.y)
-        mario2.pos.set(data[i].x, data[i].y)
-       // ++i;
-      //  console.log(data.x, data.y)
+        var data = JSON.parse(this.response)
+        mario2.pos.set(data[0].x, data[0].y)
         }
       xhr.send()
       setTimeout(age, 3000)
       }
 
-});
+    })
