@@ -1,28 +1,30 @@
 var currentUser = "red";
 
+function checkLogin() {
+  let email, psw;
+  email = document.getElementById("emailLogin").value;
 
-function checkLogin(){
-let email,psw;
-email=document.getElementById("emailLogin").value;
+  psw = document.getElementById("pswLogin").value;
 
-psw=document.getElementById("pswLogin").value;
-
-let user_records=new Array();
-user_records=JSON.parse(localStorage.getItem("users"))?JSON.parse(localStorage.getItem("users")):[]
-
-if(user_records.some((v)=>{return v.email==email && v.psw==psw}))
-{
-  alert("Login Pass");
-  let current_user=user_records.filter((v)=>{return v.email==email && v.psw==psw})[0]
- localStorage.setItem('name',current_user.name);
- localStorage.setItem('email',current_user.email);
- window.location.href="game.html"
-}
-else
-{
-  alert('Login Fail');
-}
-
+  let user_records = new Array();
+  user_records = JSON.parse(localStorage.getItem("users"))
+    ? JSON.parse(localStorage.getItem("users"))
+    : [];
+  if (
+    user_records.some((v) => {
+      return v.email == email && v.psw == psw;
+    })
+  ) {
+    alert("Login Pass");
+    let current_user = user_records.filter((v) => {
+      return v.email == email && v.psw == psw;
+    })[0];
+    localStorage.setItem("name", current_user.name);
+    localStorage.setItem("email", current_user.email);
+    window.location.href = "game.html";
+  } else {
+    alert("Login Fail");
+  }
 }
 
 function saveData() {
@@ -43,30 +45,34 @@ function saveData() {
       return v.email == email;
     })
   ) {
-    alert("That user already exists");
+    alert("duplicate data");
   } else {
-      key= email;
-      user_records.push({
+    user_records.push({
       name: name,
       email: email,
       psw: psw,
       posX: posX,
-      posY, posY
+      posY, posY,
     });
-    setCurrentUser(name);
-    localStorage.setItem(key, JSON.stringify(user_records));
+    localStorage.setItem("users", JSON.stringify(user_records));
   }
- // showData();
+  // showData();
+
+  // function setCurrentUser(name) {
+  //   currentUser = name;
+  // }
+  //export function getCurrentUser() {
+  //  return currentUser;
 }
 
-function setCurrentUser(name){
-    currentUser = name;
-}
-export function getCurrentUser(){
-    return currentUser;
-}
-
-
+// export function pushData(posX, posY){
+//     user_records.push({
+//         key = email,
+//         posX: posX,
+//         posY, posY
+//       });
+//      localStorage.setItem(key, JSON.stringify(user_records));
+// }
 
 // function showData() {
 //   document.getElementById("showUsers").innerHTML = "";

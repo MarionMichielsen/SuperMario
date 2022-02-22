@@ -5,14 +5,14 @@ import {createMario2 } from './entities.js';
 import {createCollisionLayer} from './layers.js';
 import {setupKeyboard} from './input.js';
 import { Mario2Go } from './traits/Go.js';
-import { getCurrentUser } from './login.js';
+//import { getCurrentUser } from './login.js';
 
 
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
 var user = "player"
-user = getCurrentUser();
+//user = getCurrentUser();
 console.log(user);
 
 Promise.all([
@@ -37,10 +37,18 @@ Promise.all([
             if (event.buttons === 1) {
                 mario.vel.set(0, 0);
                 mario.pos.set(event.offsetX, event.offsetY);
-               var posX = event.offsetX;
-               var posY = event.offsetY;
-               localStorage.setItem(user, JSON.stringify(posX));
-               localStorage.setItem(user, JSON.stringify(posY));
+                let user_position = new Array();
+                var posX = event.offsetX;
+                var posY = event.offsetY;
+                user_position.push({
+                    posX: posX,
+                    posY: posY })
+               localStorage.setItem(user, JSON.stringify(user_position));
+            //    localStorage.setItem(user, JSON.stringify(posX));
+            //    console.log("posX"+posX);
+            //    localStorage.setItem(user, JSON.stringify(posY));
+            //    console.log("posY"+posY);
+               console.log(localStorage.getItem(user))
 
             }
               });
