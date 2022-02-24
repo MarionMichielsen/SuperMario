@@ -17,9 +17,11 @@ app.get("/number", (req, res)=>{
   headers={http_status:200, "cache-control": "no-cache"}
   body= 
   [
-    {
-      "x": createRandomNumber(),
-      "y": createRandomNumber(),
+     {
+   "x": createRandomNumber(),
+   "y": createRandomNumber(),
+    //   "x": getXPosition(),
+    //   "y": getYPosition(),
     }
   ]
   res.set('Content-Type', 'application/json')
