@@ -1,3 +1,6 @@
+//import {getXPosition, getYPosition} from '../public/js/main.js'
+
+
 const cors = require("cors")
 const express = require("express")
 
@@ -18,10 +21,10 @@ app.get("/number", (req, res)=>{
   body= 
   [
      {
-   "x": createRandomNumber(),
-   "y": createRandomNumber(),
-    //   "x": getXPosition(),
-    //   "y": getYPosition(),
+  // "x": createRandomNumber(),
+  // "y": createRandomNumber(),
+      "x": getXPosition(),
+     "y": getYPosition(),
     }
   ]
   res.set('Content-Type', 'application/json')
@@ -37,18 +40,22 @@ app.listen(PORT , ()=>{
   console.log('STARTED LISTENING ON PORT ${PORT}')
 });
 
-//setTimeout(age, 2000)
+function getXPosition(){
 
-// function age(){
-//     var xhr = new XMLHttpRequest()
-//     xhr.open("GET", "http://localhost:3001/number")
-//     xhr.onload = function(){
-//         var data = JSON.parse(this.response)
-//         createRandomNumber();
-//       }
-//     xhr.send()
-//     setTimeout(age, 2000)
-// }
+}
+
+setTimeout(age, 10)
+
+function age(){
+    var xhr = new XMLHttpRequest()
+    xhr.open("GET", "https://marion-supermarion.herokuapp.com/position")
+    xhr.onload = function(){
+        var data = JSON.parse(this.response)
+        saveGreenPosition();
+      }
+    xhr.send()
+    setTimeout(age, 10)
+}
 
 
 // document.addEventListener('DOMContentLoaded', function() {

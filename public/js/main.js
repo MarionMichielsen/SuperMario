@@ -8,7 +8,6 @@ import { Mario2Go } from "./traits/Go.js";
 //import Player from './Player.js'
 
 localStorage.setItem("id", JSON.stringify('{"id":"1"}'));
-``;
 const uuid = localStorage.getItem("uuid");
 let user_records = new Array();
 user_records = JSON.parse(localStorage.getItem("users"))
@@ -59,9 +58,12 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
     level.entities.add(mario2);
 
     let xGreen = new Map();
-    xGreen.set(uuid,mario.pos.getX)
+    xGreen.set(uuid,mario.pos.getX())
     let yGreen = new Map();
-    yGreen.set(uuid,mario.pos.getX)
+    yGreen.set(uuid,mario.pos.getX())
+
+    
+
 
     const input = setupKeyboard(mario);
     input.listenTo(window);
@@ -75,6 +77,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
 
           xGreen.set(uuid,event.offsetX)
           yGreen.set(uuid,event.offsetY)
+          console.log("Moved to:" +xGreen.get(uuid));
         //  player.setPositionX(event.offsetX)
         //  player.setPositionX(event.offsetY)
 
@@ -127,6 +130,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
       }
      // xhr.send();
 
-  })
+  }
+  )
   
 
