@@ -3,6 +3,7 @@
 
 const cors = require("cors")
 const express = require("express")
+var bodyParser = require('body-parser')
 
 const PORT = process.env.PORT || 3001
 const app = express()
@@ -10,13 +11,18 @@ const app = express()
 //app.use('healthcheck', require('./routes/healthcheck.routes'));
 app.use(express.urlencoded({ extended: true}));
 app.use(cors())
+app.use(bodyParser.json())
 
 
 app.get('/', (req,res) =>{
   res.json('hi')
 })
+router.post('/save',  (req, res) => {
+  console.log(req.body)
+  res.send('yep')
+})
 
-app.get("/number", (req, res)=>{
+app.get("/save", (req, res)=>{
   headers={http_status:200, "cache-control": "no-cache"}
   body= 
   [
@@ -40,18 +46,15 @@ app.listen(PORT , ()=>{
   console.log('STARTED LISTENING ON PORT ${PORT}')
 });
 
-function getXPosition(){
-
-}
 
 setTimeout(age, 10)
 
 function age(){
     var xhr = new XMLHttpRequest()
-    xhr.open("GET", "https://marion-supermarion.herokuapp.com/position")
+    xhr.open("GET", "/get_Xposition")
     xhr.onload = function(){
         var data = JSON.parse(this.response)
-        saveGreenPosition();
+      //  saveGreenPosition();
       }
     xhr.send()
     setTimeout(age, 10)

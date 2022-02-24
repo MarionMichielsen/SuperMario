@@ -57,12 +57,15 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
     level.entities.add(mario);
     level.entities.add(mario2);
 
-    let xGreen = new Map();
-    xGreen.set(uuid,mario.pos.getX())
-    let yGreen = new Map();
-    yGreen.set(uuid,mario.pos.getX())
+    // let xGreen = new Map();
+    // xGreen.set(uuid,mario.pos.getX())
+    // let yGreen = new Map();
+    // yGreen.set(uuid,mario.pos.getX())
 
-    
+    $.post('/save', () => {
+      x : mario.pos.getX();
+  })
+
 
 
     const input = setupKeyboard(mario);
