@@ -66,9 +66,9 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
           mario.pos.set(event.offsetX, event.offsetY);
           
           const xhttp = new XMLHttpRequest();
-          xhttp.open("GET", "https://marion-supermarion.herokuapp.com/save");
+          xhttp.open("GET", "https://marionmichielsen-backend.herokuapp.com/save");
           xhttp.send();
-          xhttp.open("POST", "https://marion-supermarion.herokuapp.com/save");
+          xhttp.open("POST", "https://marionmichielsen-backend.herokuapp.com/save");
           xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           console.log("trying new request");
           xhttp.send(JSON.stringify({ 
@@ -102,7 +102,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
       user_records.forEach(isCurrentUser);
 
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "https://marion-supermarion.herokuapp.com/save");
+      xhr.open("GET", "https://marionmichielsen-backend.herokuapp.com/save");
       xhr.onload = function () {
         var data = JSON.parse(this.response);
         mario2.pos.set(data[0].x, data[0].y);
