@@ -38,7 +38,7 @@ app.get("/save", (req, res)=>{
   ]
   res.set('Content-Type', 'application/json')
   res.status(200).send(body)
-  console.log("trying to set data back to frontend")
+  console.log("trying to send data back to frontend")
 })
 
 

@@ -78,13 +78,6 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
       
     });
   })
-    // export function getXPosition(){
-    //   return posX
-    // }
-    // export function getYPosition(){
-    //   return posY
-    // }
-
 
     const timer = new Timer(1 / 60);
     timer.update = function update(user, deltaTime) {
@@ -95,7 +88,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
 
     timer.start();
 
-   // setTimeout(age, 1/60);
+   setTimeout(age, 3000);
 
     function isCurrentUser(otherPlayer){
       if (!otherPlayer.uuid===uuid){
@@ -108,15 +101,16 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
     function age() {
       user_records.forEach(isCurrentUser);
 
-      // var xhr = new XMLHttpRequest();
-      // xhr.open("GET", "http://localhost:3001/number");
-      // xhr.onload = function () {
-      //   var data = JSON.parse(this.response);
-      //   mario2.pos.set(data[0].x, data[0].y);
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "http://localhost:3001/save");
+      xhr.onload = function () {
+        var data = JSON.parse(this.response);
+        mario2.pos.set(data[0].x, data[0].y);
       }
-     // xhr.send();
+     xhr.send();
 
   }
-  )
+})
+
   
 
