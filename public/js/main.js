@@ -54,28 +54,28 @@ function create_UUID() {
 const canvas = document.getElementById("screen");
 const context = canvas.getContext("2d");
 
-function savePosition(posX, posY) {
-  let data = {
-      uuid: uuid,
-      x: posX,  
-      y: posY
-  };
-  fetch("/save", {
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify(data)
-  }).then((response) => {
-      response.text().then(function (data) {
-          let result = JSON.parse(data);
-          console.log(result)
-      });
-  }).catch((error) => {
-      console.log(error)
-  });
-}
+// function savePosition(posX, posY) {
+//   let data = {
+//       uuid: uuid,
+//       x: posX,  
+//       y: posY
+//   };
+//   fetch("/save", {
+//       headers: {
+//           'Accept': 'application/json',
+//           'Content-Type': 'application/json'
+//       },
+//       method: "POST",
+//       body: JSON.stringify(data)
+//   }).then((response) => {
+//       response.text().then(function (data) {
+//           let result = JSON.parse(data);
+//           console.log(result)
+//       });
+//   }).catch((error) => {
+//       console.log(error)
+//   });
+// }
 
 Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
   ([mario, mario2, level]) => {
@@ -109,22 +109,32 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
           let posX= event.offsetX;
           let posY = event.offsetY;
           mario.pos.set(event.offsetX, event.offsetY);
+          
+          const xhttp = new XMLHttpRequest();
+          xhttp.open("GET", "http://localhost:3001/save");
+          xhttp.send();
+          xhttp.open("POST", "http://localhost:3001/save");
+          xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          console.log("trying new request");
+          xhttp.send(JSON.stringify({ 
+            "uuid": uuid, "x":posX, "y":posY,
+          }));
 
-          let request = new XMLHttpRequest();
-          request.open("POST", "http://localhost:3001/save");
-          console.log("trying to send request")
-          request.onload = function(){
+        //   let request = new XMLHttpRequest();
+        //   request.open("POST", "http://localhost:3001/save");
+        //   console.log("trying to send request")
+        //   request.onload = function(){
     
-          body= 
-          [
-             {"uuid": uuid,
-              "x": posX,
-             "y": posY,
-            },
-          ]
-          console.log(body)
-          request.send(body);
-        }
+        //   body= 
+        //   [
+        //      {"uuid": uuid,
+        //       "x": posX,
+        //      "y": posY,
+        //     },
+        //   ]
+        //   console.log(body)
+        //   request.send(body);
+        // }
           //event.preventDefault()
 
           // xGreen.set(uuid,event.offsetX)

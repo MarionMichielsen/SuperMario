@@ -16,6 +16,8 @@ app.post("/save", (req, res)=>{
   let uuid = req.body.uuid;
   let x = req.body.x;
   let y = req.body.y;
+  console.log("Y "+y);
+  console.log("Z " +x)
   // body= 
   // [
   //    { "uuid": "uuid",
@@ -35,9 +37,9 @@ app.post("/save", (req, res)=>{
 //   body= 
 //   [
 //     {
-//       "uuid": uuid,
-//       "x": x,
-//       "y": y,
+//       "uuid": "uuid",
+//       "x": "x",
+//       "y": "y",
 //     }
 //   ]
 //   res.set('Content-Type', 'application/json')
