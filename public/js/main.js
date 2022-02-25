@@ -4,8 +4,7 @@ import { createMario } from "./entities.js";
 import { createMario2 } from "./entities.js";
 import { createCollisionLayer } from "./layers.js";
 import { setupKeyboard } from "./input.js";
-import { Mario2Go } from "./traits/Go.js";
-//import Player from './Player.js'
+
 
 localStorage.setItem("id", JSON.stringify('{"id":"1"}'));
 const uuid = localStorage.getItem("uuid");
@@ -15,7 +14,6 @@ user_records = JSON.parse(localStorage.getItem("users"))
   : [];
 console.log(localStorage.getItem("users"));
 
-// if user is null
 if (localStorage.getItem("uuid") === null) {
   const uuid = create_UUID();
   localStorage.setItem("uuid", JSON.stringify(uuid));
@@ -25,9 +23,6 @@ if (localStorage.getItem("uuid") === null) {
 } else {
   console.log("Current User: " + uuid);
 }
-
-
-//const player = new Player(localStorage.getItem("uuid"), 0, 0);
 
 function create_UUID() {
   var dt = new Date().getTime();
@@ -47,15 +42,14 @@ function create_UUID() {
 // import express from 'express';
 // import cors from 'corse';
 // import bodyParser from '../node_modules/body-parser/index.js'
-// // const cors = require("cors")
-// // const express = require("express")
-// // var bodyParser = require('body-parser')
+// const cors = require("cors")
+// const express = require("express")
+// var bodyParser = require('body-parser')
 
 // const PORT = process.env.PORT || 3000
 // const app = express()
-// const user = require('../controllers/user')
 // const router = express. Router(); 
-// router. get('/get_position')
+// router. get('/save')
 
 const canvas = document.getElementById("screen");
 const context = canvas.getContext("2d");
@@ -66,7 +60,7 @@ function savePosition(posX, posY) {
       x: posX,  
       y: posY
   };
-  fetch("/get_position", {
+  fetch("/save", {
       headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -118,19 +112,19 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
 
           let request = new XMLHttpRequest();
           request.open("POST", "http://localhost:3001/save");
-          //request.send(new FormData(formElement));
-          console.log("saved green position")
-      
-         // request.setRequestHeader("http_status"="200", "cache-control"= "no-cache");
-          // request.send('uuid = uuid & x= posX& y= posY');
-          //headers={http_status:200, "cache-control": "no-cache"}
-          request.body= 
+          console.log("trying to send request")
+          request.onload = function(){
+    
+          body= 
           [
              {"uuid": uuid,
               "x": posX,
              "y": posY,
-            }
+            },
           ]
+          console.log(body)
+          request.send(body);
+        }
           //event.preventDefault()
 
           // xGreen.set(uuid,event.offsetX)
@@ -148,9 +142,10 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
           //  console.log(JSON.stringify(user_position))
           //  localStorage.setItem(email, JSON.stringify(user_position))
           //  console.log(JSON.stringify(localStorage.getItem(email)))
-        }
-      });
+          }
+      
     });
+  })
     // export function getXPosition(){
     //   return posX
     // }

@@ -1,6 +1,3 @@
-//import {getXPosition, getYPosition} from '../public/js/main.js'
-
-
 const cors = require("cors")
 const express = require("express")
 var bodyParser = require('body-parser')
@@ -13,29 +10,41 @@ app.use(express.urlencoded({ extended: true}));
 app.use(cors())
 app.use(bodyParser.json())
 
-
-app.get('/', (req,res) =>{
-  res.json('hi')
-})
-// router.post('/save',  (req, res) => {
-//   console.log(req.body)
-//   res.send('yep')
-// })
-
 app.post("/save", (req, res)=>{
   headers={http_status:200, "cache-control": "no-cache"}
-  body= 
-  [
-     {
-  // "x": createRandomNumber(),
-  // "y": createRandomNumber(),
-      "x": getXPosition(),
-     "y": getYPosition(),
-    }
-  ]
+  console.log('TRYING to get data from frontend to backend')
+  let uuid = req.body.uuid;
+  let x = req.body.x;
+  let y = req.body.y;
+  // body= 
+  // [
+  //    { "uuid": "uuid",
+  // // "x": createRandomNumber(),
+  // // "y": createRandomNumber(),
+  //     "x": "x",
+  //    "y": "y",
+  //   }
+  // ]
+  //console.log("body of data request:"+JSON.stringify(body)  )
+
   res.set('Content-Type', 'application/json')
-  res.status(200).send(body)
 })
+
+// app.get("/save", (req, res)=>{
+//   headers={http_status:200, "cache-control": "no-cache"}
+//   body= 
+//   [
+//     {
+//       "uuid": uuid,
+//       "x": x,
+//       "y": y,
+//     }
+//   ]
+//   res.set('Content-Type', 'application/json')
+//   res.status(200).send(body)
+//   console.log("trying to set data back to frontend")
+// })
+
 
 
 function createRandomNumber(){
@@ -59,25 +68,3 @@ setTimeout(age, 10)
     // xhr.send()
     // setTimeout(age, 10)
 }
-
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     var buttonRandom = document.createElement('button');
-//     buttonRandom.type = 'button';
-//     buttonRandom.innerHTML = 'Click here to move green Mario randomly';
-//     buttonRandom.className = 'btn-styled';
-//   //  buttonRandom.onclick = (openData);
-
-//     var buttonSetPos = document.createElement('button');
-//     buttonSetPos.type = 'button';
-//     buttonSetPos.innerHTML = 'Click here to move green Mario to a set position';
-//     buttonSetPos.className = 'btn-styled';
- 
-//     //button.onclick = function() {
-//         // …
-//    // };
- 
-//     var container = document.getElementById('app');
-//     container.appendChild(buttonRandom);
-//     container.appendChild(buttonSetPos);
-// }, false);
