@@ -39,43 +39,9 @@ function create_UUID() {
   return uuid;
 }
 
-// import express from 'express';
-// import cors from 'corse';
-// import bodyParser from '../node_modules/body-parser/index.js'
-// const cors = require("cors")
-// const express = require("express")
-// var bodyParser = require('body-parser')
-
-// const PORT = process.env.PORT || 3000
-// const app = express()
-// const router = express. Router(); 
-// router. get('/save')
 
 const canvas = document.getElementById("screen");
 const context = canvas.getContext("2d");
-
-// function savePosition(posX, posY) {
-//   let data = {
-//       uuid: uuid,
-//       x: posX,  
-//       y: posY
-//   };
-//   fetch("/save", {
-//       headers: {
-//           'Accept': 'application/json',
-//           'Content-Type': 'application/json'
-//       },
-//       method: "POST",
-//       body: JSON.stringify(data)
-//   }).then((response) => {
-//       response.text().then(function (data) {
-//           let result = JSON.parse(data);
-//           console.log(result)
-//       });
-//   }).catch((error) => {
-//       console.log(error)
-//   });
-// }
 
 Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
   ([mario, mario2, level]) => {
@@ -86,17 +52,6 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
 
     level.entities.add(mario);
     level.entities.add(mario2);
-
-    // let xGreen = new Map();
-    // xGreen.set(uuid,mario.pos.getX())
-    // let yGreen = new Map();
-    // yGreen.set(uuid,mario.pos.getX())
-
-  //   $.post('/save', () => {
-  //     x : mario.pos.getX();
-  // })
-
-
 
     const input = setupKeyboard(mario);
     input.listenTo(window);
@@ -119,39 +74,6 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
           xhttp.send(JSON.stringify({ 
             "uuid": uuid, "x":posX, "y":posY,
           }));
-
-        //   let request = new XMLHttpRequest();
-        //   request.open("POST", "http://localhost:3001/save");
-        //   console.log("trying to send request")
-        //   request.onload = function(){
-    
-        //   body= 
-        //   [
-        //      {"uuid": uuid,
-        //       "x": posX,
-        //      "y": posY,
-        //     },
-        //   ]
-        //   console.log(body)
-        //   request.send(body);
-        // }
-          //event.preventDefault()
-
-          // xGreen.set(uuid,event.offsetX)
-          // yGreen.set(uuid,event.offsetY)
-       //   console.log("Moved to:" +xGreen.get(uuid));
-        //  player.setPositionX(event.offsetX)
-        //  player.setPositionX(event.offsetY)
-
-          //     let user_position = new Array();
-          //     var posX = event.offsetX;
-          //     var posY = event.offsetY;
-          //     user_position.push({
-          //         posX: posX,
-          //         posY: posY })
-          //  console.log(JSON.stringify(user_position))
-          //  localStorage.setItem(email, JSON.stringify(user_position))
-          //  console.log(JSON.stringify(localStorage.getItem(email)))
           }
       
     });
