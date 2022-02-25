@@ -44,8 +44,44 @@ function create_UUID() {
   return uuid;
 }
 
+// import express from 'express';
+// import cors from 'corse';
+// import bodyParser from '../node_modules/body-parser/index.js'
+// // const cors = require("cors")
+// // const express = require("express")
+// // var bodyParser = require('body-parser')
+
+// const PORT = process.env.PORT || 3000
+// const app = express()
+// const user = require('../controllers/user')
+// const router = express. Router(); 
+// router. get('/get_position')
+
 const canvas = document.getElementById("screen");
 const context = canvas.getContext("2d");
+
+function savePosition(posX, posY) {
+  let data = {
+      uuid: uuid,
+      x: posX,  
+      y: posY
+  };
+  fetch("/get_position", {
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(data)
+  }).then((response) => {
+      response.text().then(function (data) {
+          let result = JSON.parse(data);
+          console.log(result)
+      });
+  }).catch((error) => {
+      console.log(error)
+  });
+}
 
 Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
   ([mario, mario2, level]) => {
@@ -62,9 +98,9 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
     // let yGreen = new Map();
     // yGreen.set(uuid,mario.pos.getX())
 
-    $.post('/save', () => {
-      x : mario.pos.getX();
-  })
+  //   $.post('/save', () => {
+  //     x : mario.pos.getX();
+  // })
 
 
 
@@ -76,11 +112,30 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
       canvas.addEventListener(eventName, (event) => {
         if (event.buttons === 1) {
           mario.vel.set(0, 0);
+          let posX= event.offsetX;
+          let posY = event.offsetY;
           mario.pos.set(event.offsetX, event.offsetY);
 
-          xGreen.set(uuid,event.offsetX)
-          yGreen.set(uuid,event.offsetY)
-          console.log("Moved to:" +xGreen.get(uuid));
+          let request = new XMLHttpRequest();
+          request.open("POST", "http://localhost:3001/save");
+          //request.send(new FormData(formElement));
+          console.log("saved green position")
+      
+         // request.setRequestHeader("http_status"="200", "cache-control"= "no-cache");
+          // request.send('uuid = uuid & x= posX& y= posY');
+          //headers={http_status:200, "cache-control": "no-cache"}
+          request.body= 
+          [
+             {"uuid": uuid,
+              "x": posX,
+             "y": posY,
+            }
+          ]
+          //event.preventDefault()
+
+          // xGreen.set(uuid,event.offsetX)
+          // yGreen.set(uuid,event.offsetY)
+       //   console.log("Moved to:" +xGreen.get(uuid));
         //  player.setPositionX(event.offsetX)
         //  player.setPositionX(event.offsetY)
 
@@ -102,6 +157,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
     // export function getYPosition(){
     //   return posY
     // }
+
 
     const timer = new Timer(1 / 60);
     timer.update = function update(user, deltaTime) {

@@ -17,12 +17,12 @@ app.use(bodyParser.json())
 app.get('/', (req,res) =>{
   res.json('hi')
 })
-router.post('/save',  (req, res) => {
-  console.log(req.body)
-  res.send('yep')
-})
+// router.post('/save',  (req, res) => {
+//   console.log(req.body)
+//   res.send('yep')
+// })
 
-app.get("/save", (req, res)=>{
+app.post("/save", (req, res)=>{
   headers={http_status:200, "cache-control": "no-cache"}
   body= 
   [
@@ -49,15 +49,15 @@ app.listen(PORT , ()=>{
 
 setTimeout(age, 10)
 
-function age(){
-    var xhr = new XMLHttpRequest()
-    xhr.open("GET", "/get_Xposition")
-    xhr.onload = function(){
-        var data = JSON.parse(this.response)
-      //  saveGreenPosition();
-      }
-    xhr.send()
-    setTimeout(age, 10)
+  function age(){
+    // var xhr = new XMLHttpRequest()
+    // xhr.open("GET", "/get_position")
+    // xhr.onload = function(){
+    //     var data = JSON.parse(this.response)
+    //   //  saveGreenPosition();
+    //   }
+    // xhr.send()
+    // setTimeout(age, 10)
 }
 
 
