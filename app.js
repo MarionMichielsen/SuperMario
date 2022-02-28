@@ -58,10 +58,10 @@ app.get("/save", (req, res)=>{
   body= 
   [
     {
-      // "x": returnGreenXPosition(uuid),
-      // "y": returnGreenYPosition(uuid),
-      "x": 50,
-      "y": 75,
+      "x": returnGreenXPosition(uuid),
+      "y": returnGreenYPosition(uuid),
+      // "x": 50,
+      // "y": 75,
     }
   ]
   res.set('Content-Type', 'application/json')
