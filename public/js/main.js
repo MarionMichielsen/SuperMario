@@ -79,7 +79,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
     });
   })
 
-    const timer = new Timer(1 / 60);
+    const timer = new Timer(1/60);
     timer.update = function update(user, deltaTime) {
       level.update(user, deltaTime);
       level.comp.draw(context);

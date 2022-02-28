@@ -8,6 +8,10 @@ let uuid ;
 let x ;
 let y ;
 
+const users = [];
+let XPosMap = new Map();
+let YPosMap = new Map();
+
 //app.use('healthcheck', require('./routes/healthcheck.routes'));
 app.use(express.urlencoded({ extended: true}));
 app.use(cors())
@@ -19,6 +23,9 @@ app.post("/save", (req, res)=>{
   uuid = req.body.uuid;
   x = req.body.x;
   y = req.body.y;
+  users.push(uuid);
+  XPosMap.set(uuid, x);
+  YPosMap.set(uuid, x);
   console.log("Y "+y);
   console.log("Z " +x)
   console.log("UUID: "+uuid)
@@ -26,19 +33,41 @@ app.post("/save", (req, res)=>{
   res.set('Content-Type', 'application/json')
 })
 
+function returnGreenXPosition(uuid){
+  if (!uuid ===users[0]){
+    posX = XPosMap.get(users[0])
+  }
+  else {
+    posX = XPosMap.get(users[1])
+  }
+  return posX;
+}
+
+function returnGreenYPosition(uuid){
+  if (!uuid ===users[0]){
+    posY = YPosMap.get(users[0])
+  }
+  else {
+    posY = YPosMap.get(users[1])
+  }
+  return posY;
+}
+
 app.get("/save", (req, res)=>{
   headers={http_status:200, "cache-control": "no-cache"}
   body= 
   [
     {
-      "uuid": uuid,
-      "x": x,
-      "y": y,
+      // "x": returnGreenXPosition(uuid),
+      // "y": returnGreenYPosition(uuid),
+      "x": 50,
+      "y": 75,
     }
   ]
   res.set('Content-Type', 'application/json')
   res.status(200).send(body)
   console.log("trying to send data back to frontend")
+  console.log("Sending back: X: "+returnGreenXPosition(uuid))
 })
 
 
