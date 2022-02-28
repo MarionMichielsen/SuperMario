@@ -35,22 +35,20 @@ app.post("/save", (req, res)=>{
 
 function returnGreenXPosition(uuid){
   if (!uuid ===users[0]){
-    posX = XPosMap.get(users[0])
+    return  XPosMap.get(users[0])
   }
   else {
-    posX = XPosMap.get(users[1])
+    return XPosMap.get(users[1])
   }
-  return posX;
 }
 
 function returnGreenYPosition(uuid){
   if (!uuid ===users[0]){
-    posY = YPosMap.get(users[0])
+    return YPosMap.get(users[0])
   }
   else {
-    posY = YPosMap.get(users[1])
+   return YPosMap.get(users[1])
   }
-  return posY;
 }
 
 app.get("/save", (req, res)=>{
