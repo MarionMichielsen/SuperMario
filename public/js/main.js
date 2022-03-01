@@ -6,6 +6,11 @@ import { createCollisionLayer } from "./layers.js";
 import { setupKeyboard } from "./input.js";
 
 
+function showUUID () {
+  document.getElementById("app").innerHTML = uuid;
+}
+
+
 localStorage.setItem("id", JSON.stringify('{"id":"1"}'));
 const uuid = localStorage.getItem("uuid");
 let user_records = new Array();
@@ -20,8 +25,10 @@ if (localStorage.getItem("uuid") === null) {
   console.log("New User, id: " + uuid);
   user_records.push(localStorage.getItem("uuid"));
   localStorage.setItem("users", JSON.stringify(user_records));
+  showUUID();
 } else {
   console.log("Current User: " + uuid);
+  showUUID();
 }
 
 function create_UUID() {
@@ -70,7 +77,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
           xhttp.send();
           xhttp.open("POST", "http://localhost:3001/save");
           xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-          console.log("trying new request");
+          console.log("trying new request: X:"+ posX+" Y: "+posY);
           xhttp.send(JSON.stringify({ 
             "uuid": uuid, "x":posX, "y":posY,
           }));
