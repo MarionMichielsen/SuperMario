@@ -73,9 +73,9 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
           mario.pos.set(event.offsetX, event.offsetY);
           
           const xhttp = new XMLHttpRequest();
-          xhttp.open("GET", "https://marionmichielsen-backend.herokuapp.com/save");
+          xhttp.open("GET", "http://localhost:3001/save");
           xhttp.send();
-          xhttp.open("POST", "https://marionmichielsen-backend.herokuapp.com/save");
+          xhttp.open("POST", "http://localhost:3001/save");
           xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           console.log("trying new request: X:"+ posX+" Y: "+posY);
           xhttp.send(JSON.stringify({ 
@@ -95,11 +95,11 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
 
     timer.start();
 
-   setTimeout(age, 3000);
+   //setTimeout(age, 3000);
 
     function isCurrentUser(otherPlayer){
       if (!otherPlayer.uuid===uuid){
-        mario2.pos.set(xGreen.get(otherPlayer.uuid),yGreen.get(otherPlayer.uuid))
+        mario2.pos.set(xPosMap.get(otherPlayer.uuid),yPosMap.get(otherPlayer.uuid))
       }
       else if (otherPlayer.uuid === uuid)
       mario2.pos.set(100,100);
@@ -109,7 +109,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
       user_records.forEach(isCurrentUser);
 
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "https://marionmichielsen-backend.herokuapp.com/save");
+      xhr.open("GET", "http://localhost:3001/save");
       xhr.onload = function () {
         var data = JSON.parse(this.response);
         mario2.pos.set(data[0].x, data[0].y);
@@ -118,5 +118,3 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
 
   }
 })
-
-  

@@ -25,7 +25,7 @@ app.post("/save", (req, res)=>{
   y = req.body.y;
   users.push(uuid);
   XPosMap.set(uuid, x);
-  YPosMap.set(uuid, x);
+  YPosMap.set(uuid, y);
   console.log("Y "+y);
   console.log("Z " +x)
   console.log("UUID: "+uuid)
