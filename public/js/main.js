@@ -108,7 +108,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
     }
 
     function age() {
-      user_records.forEach(isCurrentUser);
+     // user_records.forEach(isCurrentUser);
 
       var xhr = new XMLHttpRequest();
       xhr.open("GET", "https://marionmichielsen-backend.herokuapp.com/save");
