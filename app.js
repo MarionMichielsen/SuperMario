@@ -79,7 +79,7 @@ app.listen(PORT , ()=>{
 });
 
 
-setTimeout(age, 10)
+setTimeout(age, 1000)
 
   function age(){
     // var xhr = new XMLHttpRequest()

@@ -64,7 +64,8 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
     input.listenTo(window);
 
 
-    ["mousedown", "mousemove"].forEach((eventName) => {
+  //  ["mousedown", "mousemove"].forEach((eventName) => {
+      ["mousedown"].forEach((eventName) => {
       canvas.addEventListener(eventName, (event) => {
         if (event.buttons === 1) {
           mario.vel.set(0, 0);
@@ -73,9 +74,8 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
           mario.pos.set(event.offsetX, event.offsetY);
           
           const xhttp = new XMLHttpRequest();
-          xhttp.open("GET", "http://localhost:3001/save");
-          xhttp.send();
-          xhttp.open("POST", "http://localhost:3001/save");
+          //xhttp.open("POST", "http://localhost:3001/save");
+          xhr.open("POST", "https://marionmichielsen-backend.herokuapp.com/save");
           xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           console.log("trying new request: X:"+ posX+" Y: "+posY);
           xhttp.send(JSON.stringify({ 
@@ -86,14 +86,22 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
     });
   })
 
-    const timer = new Timer(1/60);
+    const timer = new Timer(1/30);
     timer.update = function update(user, deltaTime) {
+      level.update(user, deltaTime);
+      level.comp.draw(context);
+     age();
+    };
+
+    const timer2 = new Timer(10);
+    timer2.update = function update(user, deltaTime) {
       level.update(user, deltaTime);
       level.comp.draw(context);
       age();
     };
 
     timer.start();
+    //timer2.start();
 
    //setTimeout(age, 3000);
 
@@ -109,8 +117,8 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
       user_records.forEach(isCurrentUser);
 
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "http://localhost:3001/save");
-      xhr.open("GET", "http://localhost:3001/save");
+      xhr.open("GET", "https://marionmichielsen-backend.herokuapp.com/save");
+   //   xhr.open("GET", "http://localhost:3001/save");
       xhr.onload = function () {
         var data = JSON.parse(this.response);
         mario2.pos.set(data[0].x, data[0].y);
