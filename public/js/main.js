@@ -75,7 +75,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
           
           const xhttp = new XMLHttpRequest();
           //xhttp.open("POST", "http://localhost:3001/save");
-          xhttp.open("POST", "https://marionmichielsen-backend.herokuapp.com/save");
+          xhttp.open("PUT", "https://marionmichielsen-backend.herokuapp.com/save");
           xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           console.log("trying new request: X:"+ posX+" Y: "+posY);
           xhttp.send(JSON.stringify({ 
