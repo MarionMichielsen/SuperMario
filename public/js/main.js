@@ -110,6 +110,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
 
       var xhr = new XMLHttpRequest();
       xhr.open("GET", "http://localhost:3001/save");
+      xhr.open("GET", "http://localhost:3001/save");
       xhr.onload = function () {
         var data = JSON.parse(this.response);
         mario2.pos.set(data[0].x, data[0].y);
