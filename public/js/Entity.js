@@ -24,9 +24,20 @@ export default class Entity {
         this[trait.NAME] = trait;
     }
 
-    update(deltaTime) {
+    update(uuid,deltaTime) {
         this.traits.forEach(trait => {
             trait.update(this, deltaTime);
+         //   this.updateMarioPosition(uuid, this.pos)
+            
         });
     }
 }
+
+//     updateMarioPosition(uuid){
+//         xhttp.open("POST", "https://marionmichielsen-backend.herokuapp.com/save");
+//         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+//         console.log("trying new request: X:"+ posX+" Y: "+posY);
+//         xhttp.send(JSON.stringify({ "uuid": uuid, "x":posX, "y":posY, })
+// ;
+// }
+
