@@ -77,7 +77,7 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
           //xhttp.open("POST", "http://localhost:3001/save");
           xhttp.open("POST", "https://marionmichielsen-backend.herokuapp.com/save");
           xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-          console.log("trying new request: X:"+ posX+" Y: "+posY);
+          console.log("trying new request: X:"+ posX+" Y: "+posY+ " UUID: "+uuid);
           xhttp.send(JSON.stringify({ 
             "uuid": uuid, "x":posX, "y":posY,
           }));
