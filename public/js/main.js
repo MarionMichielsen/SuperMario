@@ -25,10 +25,10 @@ if (localStorage.getItem("uuid") === null) {
   console.log("New User, id: " + uuid);
   user_records.push(localStorage.getItem("uuid"));
   localStorage.setItem("users", JSON.stringify(user_records));
-//  showUUID();
+ showUUID();
 } else {
   console.log("Current User: " + uuid);
- // showUUID();
+ showUUID();
 }
 
 function create_UUID() {
