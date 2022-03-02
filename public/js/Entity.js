@@ -24,7 +24,7 @@ export default class Entity {
         this[trait.NAME] = trait;
     }
 
-    update(uuid,deltaTime) {
+    update(deltaTime) {
         this.traits.forEach(trait => {
             trait.update(this, deltaTime);
          //   this.updateMarioPosition(uuid, this.pos)
