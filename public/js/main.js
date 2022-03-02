@@ -27,7 +27,7 @@ if (localStorage.getItem("uuid") === null) {
   localStorage.setItem("users", JSON.stringify(user_records));
   showUUID();
 } else {
-  console.log("Current User: " + uuid);
+  console.log("Current User: " + uuid+"all users: "+localStorage.getItem("users"));
   showUUID();
 }
 
