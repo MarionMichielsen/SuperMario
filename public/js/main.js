@@ -64,8 +64,8 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
     input.listenTo(window);
 
 
-    ["mousedown", "mousemove"].forEach((eventName) => {
-   //   ["mousedown"].forEach((eventName) => {
+   // ["mousedown", "mousemove"].forEach((eventName) => {
+    ["mousedown"].forEach((eventName) => {
       canvas.addEventListener(eventName, (event) => {
         if (event.buttons === 1) {
           mario.vel.set(0, 0);
