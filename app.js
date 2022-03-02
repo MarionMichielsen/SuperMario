@@ -1,4 +1,4 @@
-/*const cors = require("cors")
+const cors = require("cors")
 const express = require("express")
 var bodyParser = require('body-parser')
 
@@ -90,4 +90,4 @@ setTimeout(age, 1000)
     //   }
     // xhr.send()
     // setTimeout(age, 10)
-}*/
+}

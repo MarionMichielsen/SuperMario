@@ -13,21 +13,21 @@ function showUUID () {
 
 localStorage.setItem("id", JSON.stringify('{"id":"1"}'));
 const uuid = localStorage.getItem("uuid");
-let user_records = new Array();
-user_records = JSON.parse(localStorage.getItem("users"))
-  ? JSON.parse(localStorage.getItem("users"))
-  : [];
-console.log(localStorage.getItem("users"));
+//let user_records = new Array();
+// user_records = JSON.parse(localStorage.getItem("users"))
+//   ? JSON.parse(localStorage.getItem("users"))
+//   : [];
+// console.log(localStorage.getItem("users"));
 
 if (localStorage.getItem("uuid") === null) {
   const uuid = create_UUID();
   localStorage.setItem("uuid", JSON.stringify(uuid));
   console.log("New User, id: " + uuid);
-  user_records.push(localStorage.getItem("uuid"));
-  localStorage.setItem("users", JSON.stringify(user_records));
+  // user_records.push(localStorage.getItem("uuid"));
+  // localStorage.setItem("users", JSON.stringify(user_records));
   showUUID();
 } else {
-  console.log("Current User: " + uuid+"all users: "+localStorage.getItem("users"));
+  console.log("Current User: " + uuid);
   showUUID();
 }
 
@@ -87,19 +87,13 @@ Promise.all([createMario(), createMario2(), loadLevel("1-1")]).then(
   })
 
     const timer = new Timer(1/30);
-    timer.update = function update(user, deltaTime) {
-      level.update(user, deltaTime);
+    timer.update = function update( deltaTime) {
+      level.update(deltaTime);
       level.comp.draw(context);
      age();
     };
 
-    const timer2 = new Timer(10);
-    timer2.update = function update(user, deltaTime) {
-      level.update(user, deltaTime);
-      level.comp.draw(context);
-      age();
-    };
-
+ 
     timer.start();
     //timer2.start();
 
